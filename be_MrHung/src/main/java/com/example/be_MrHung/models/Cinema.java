@@ -17,12 +17,16 @@ public class Cinema {
     @Column(name = "cinema_address")
     private String cinemaAddress;
 
+    @Column(name = "city")
+    private String city;
+
     public Cinema() {
     }
 
-    public Cinema(String cinemaName, String cinemaAddress) {
+    public Cinema(String cinemaName, String cinemaAddress, String city) {
         this.cinemaName = cinemaName;
         this.cinemaAddress = cinemaAddress;
+        this.city = city;
     }
 
     public int getCinemaId() {
@@ -47,6 +51,14 @@ public class Cinema {
 
     public void setCinemaAddress(String cinemaAddress) {
         this.cinemaAddress = cinemaAddress;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }
 

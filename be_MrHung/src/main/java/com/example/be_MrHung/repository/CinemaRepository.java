@@ -19,7 +19,7 @@ public interface CinemaRepository extends JpaRepository<Cinema, Integer> {
     @Query(nativeQuery = true, value = "SELECT `cinemas`.* FROM `cinemas`, `schedule`, `room` WHERE `schedule`.`room_id` = `room`.`room_id` AND `room`.`cinema_id` = `cinemas`.`cinema_id` AND `schedule`.`movie_id` = ?1 AND `schedule`.`schedule_date` = ?2")
     List<Cinema> getScheduleCinema(Integer movie_id, String schedule_date);
 
-    @Query("SELECT c FROM Cinema c WHERE c.cinemaAddress LIKE %:address%")
-    List<Cinema> findCinemasByAddress(@Param("address") String address);
+    @Query("SELECT c FROM Cinema c WHERE c.city LIKE %:city%")
+    List<Cinema> findCinemasByAddress(@Param("city") String city);
 
 }

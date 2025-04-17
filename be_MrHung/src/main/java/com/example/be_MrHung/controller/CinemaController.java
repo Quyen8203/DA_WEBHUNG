@@ -25,7 +25,7 @@ public class CinemaController {
 
     @GetMapping("/search")
     public ResponseEntity<ResponseData<List<Cinema>>> searchCinemasByAddress(
-            @RequestParam("address") String address) {
+            @RequestParam("city") String address) {
 
         ResponseData<List<Cinema>> response = cinemaService.searchCinemasByAddress(address);
         return ResponseEntity.status(response.getStatus()).body(response);
@@ -40,6 +40,13 @@ public class CinemaController {
     //Lấy rạp phim theo phim và ngày chiếu cụ thể
     @GetMapping("/movie-date")
     public ResponseEntity<ResponseData<List<Cinema>>> getCinemasByMovieAndDate(
+            @RequestParam ("movie_id") Integer movie_id,
+            @RequestParam("schedule_date") String schedule_date) {
+        return ResponseEntity.ok(cinemaService.getCinemasByMovieAndDate(movie_id, schedule_date));
+    }
+
+    @GetMapping("/date")
+    public ResponseEntity<ResponseData<List<Cinema>>> getCinemasByDate(
             @RequestParam ("movie_id") Integer movie_id,
             @RequestParam("schedule_date") String schedule_date) {
         return ResponseEntity.ok(cinemaService.getCinemasByMovieAndDate(movie_id, schedule_date));
