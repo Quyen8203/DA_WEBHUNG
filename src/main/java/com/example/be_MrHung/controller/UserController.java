@@ -1,14 +1,23 @@
 package com.example.be_MrHung.controller;
 
 
+import com.example.be_MrHung.dto.LoginRequest;
+import com.example.be_MrHung.eNum.JwtResponse;
 import com.example.be_MrHung.eNum.ResponseData;
 
 
 
 import com.example.be_MrHung.models.User;
+import com.example.be_MrHung.security.CustomUserDetailsService;
+import com.example.be_MrHung.security.JwtTokenUtil;
 import com.example.be_MrHung.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -50,4 +59,33 @@ public class UserController {
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+
+    @Autowired
+    private CustomUserDetailsService userDetailsService;
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            loginRequest.getEmail(),
+                            loginRequest.getPassword()
+                    )
+            );
+
+            final UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getEmail());
+            final String token = jwtTokenUtil.generateToken(userDetails);
+
+            return ResponseEntity.ok(new JwtResponse(token));
+        } catch (BadCredentialsException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Email hoặc mật khẩu không đúng");
+        }
+    }
 }
+
+
