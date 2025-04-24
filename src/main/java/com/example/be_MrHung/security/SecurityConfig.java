@@ -27,7 +27,6 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    // Sử dụng AuthenticationManager từ cấu hình
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
@@ -40,7 +39,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/movies/**","/dichvu/**","/cinema/**","/schedule/**",
-                                "/user/create" ,"/user/del/","user/update/","user/list","/user/login").permitAll()
+                                "/user/create" ,"/user/del/","user/update/","user/list","/user/login","user/update-passwords","/ticket/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
