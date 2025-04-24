@@ -10,21 +10,22 @@ public class Ticket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ticketId;
 
-    private int userId;
+    private int ticket_id;
 
-    private int scheduleId;
+    private int user_id;
 
-    private int seatId;
+    private int schedule_id;
+
+    private int seat_id;
 
     @Column(columnDefinition = "DECIMAL(10,2) default 0.00")
-    private BigDecimal ticketPrice;
+    private BigDecimal ticket_price;
 
     @Column(columnDefinition = "TINYINT default 1")
-    private byte ticketStatus;
+    private byte ticket_status;
 
-    private LocalDateTime bookingTime;
+    private LocalDateTime booking_time;
 
     // Constructor mặc định
     public Ticket() {
@@ -32,69 +33,68 @@ public class Ticket {
 
     // Constructor đầy đủ
     public Ticket(int ticketId, int userId, int scheduleId, int seatId, BigDecimal ticketPrice, byte ticketStatus, LocalDateTime bookingTime) {
-        this.ticketId = ticketId;
-        this.userId = userId;
-        this.scheduleId = scheduleId;
-        this.seatId = seatId;
-        this.ticketPrice = ticketPrice;
-        this.ticketStatus = ticketStatus;
-        this.bookingTime = bookingTime;
+        this.ticket_id = ticketId;
+        this.user_id = userId;
+        this.schedule_id = scheduleId;
+        this.seat_id = seatId;
+        this.ticket_price = ticketPrice;
+        this.ticket_status = ticketStatus;
+        this.booking_time = bookingTime;
     }
 
-    // Getters và Setters
-    public int getTicketId() {
-        return ticketId;
+    public int getTicket_id() {
+        return ticket_id;
     }
 
-    public void setTicketId(int ticketId) {
-        this.ticketId = ticketId;
+    public void setTicket_id(int ticket_id) {
+        this.ticket_id = ticket_id;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
-    public int getScheduleId() {
-        return scheduleId;
+    public int getSchedule_id() {
+        return schedule_id;
     }
 
-    public void setScheduleId(int scheduleId) {
-        this.scheduleId = scheduleId;
+    public void setSchedule_id(int schedule_id) {
+        this.schedule_id = schedule_id;
     }
 
-    public int getSeatId() {
-        return seatId;
+    public int getSeat_id() {
+        return seat_id;
     }
 
-    public void setSeatId(int seatId) {
-        this.seatId = seatId;
+    public void setSeat_id(int seat_id) {
+        this.seat_id = seat_id;
     }
 
-    public BigDecimal getTicketPrice() {
-        return ticketPrice;
+    public BigDecimal getTicket_price() {
+        return ticket_price;
     }
 
-    public void setTicketPrice(BigDecimal ticketPrice) {
-        this.ticketPrice = ticketPrice;
+    public void setTicket_price(BigDecimal ticket_price) {
+        this.ticket_price = ticket_price;
     }
 
-    public byte getTicketStatus() {
-        return ticketStatus;
+    public byte getTicket_status() {
+        return ticket_status;
     }
 
-    public void setTicketStatus(byte ticketStatus) {
-        this.ticketStatus = ticketStatus;
+    public void setTicket_status(byte ticket_status) {
+        this.ticket_status = ticket_status;
     }
 
-    public LocalDateTime getBookingTime() {
-        return bookingTime;
+    public LocalDateTime getBooking_time() {
+        return booking_time;
     }
 
-    public void setBookingTime(LocalDateTime bookingTime) {
-        this.bookingTime = bookingTime;
+    public void setBooking_time(LocalDateTime booking_time) {
+        this.booking_time = booking_time;
     }
 }

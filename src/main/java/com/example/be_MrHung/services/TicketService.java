@@ -52,18 +52,18 @@ public class TicketService {
 
             for (Ticket ticket : tickets) {
                 // Kiểm tra các trường bắt buộc
-                if (ticket.getUserId() <= 0) {
+                if (ticket.getUser_id() <= 0) {
                     return new ResponseData<>(HttpStatus.BAD_REQUEST, "user_id không hợp lệ", null);
                 }
-                if (ticket.getScheduleId() <= 0) {
+                if (ticket.getSchedule_id() <= 0) {
                     return new ResponseData<>(HttpStatus.BAD_REQUEST, "schedule_id không hợp lệ", null);
                 }
-                if (ticket.getSeatId() <= 0) {
+                if (ticket.getSeat_id() <= 0) {
                     return new ResponseData<>(HttpStatus.BAD_REQUEST, "seat_id không hợp lệ", null);
                 }
 
                 // Đặt thời gian đặt vé
-                ticket.setBookingTime(LocalDateTime.now());
+                ticket.setBooking_time(LocalDateTime.now());
 
                 // Lưu vé
                 savedTickets.add(ticketRepository.save(ticket));
@@ -81,14 +81,14 @@ public class TicketService {
             Ticket existingTicket = ticketRepository.findById(id)
                     .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy vé với ID: " + id));
 
-            if (ticket.getTicketId() != id) {
+            if (ticket.getTicket_id() != id) {
                 throw new IllegalArgumentException("ID trong đường dẫn không khớp với ID trong body");
             }
 
             // Cập nhật các trường
-            existingTicket.setUserId(ticket.getUserId());
-            existingTicket.setScheduleId(ticket.getScheduleId());
-            existingTicket.setSeatId(ticket.getSeatId());
+            existingTicket.setUser_id(ticket.getUser_id());
+            existingTicket.setSchedule_id(ticket.getSchedule_id());
+            existingTicket.setSeat_id(ticket.getSeat_id());
 
 
             Ticket updatedTicket = ticketRepository.save(existingTicket);
