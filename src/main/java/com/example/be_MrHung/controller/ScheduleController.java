@@ -41,5 +41,4 @@ public class ScheduleController {
         return ResponseEntity.ok(scheduleService.getSchedulesByMovieAndCinemaAndDate(movieId,cinemaId,date));
     }
 
-
 }

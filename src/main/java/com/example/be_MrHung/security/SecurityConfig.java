@@ -42,6 +42,7 @@ public class SecurityConfig {
                                 "/user/create" ,"/user/del/","user/update/","user/list","/user/login","user/update-passwords",
                                 "/ticket/**","/ticket/create","/ticket/update/**",
                                 "/user/by-email/**","/user/update-passwords","/user/update/**").permitAll()
+
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
